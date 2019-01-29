@@ -13,12 +13,12 @@ class App extends Component {
     otherState: 'some other value'
   }
 
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     //console.log('Was clicked!');
     //DON'T DO THIS- won't work when you change state directly like this  this.state.persons[0].name = 'Maximilian'
     this.setState({ 
       persons: [
-        { name: 'Maximilian', age: 28 },
+        { name: newName, age: 28 },
         { name: 'Manu', age: 29 },
         { name: 'Stephanie', age: 27 }
       ]
@@ -30,7 +30,10 @@ class App extends Component {
       <div className="App">
         <h1>Hi I'm a react app</h1>
         <p>This is really working!</p>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <button onClick={this.switchNameHandler.bind(this, 'Maximilian')}>Switch Name</button>
+
+        {/* Alternative which executes an arrow function that does not use bind*/}
+        <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name2</button>
           {/*you can render them both ways. Bottom is for nesting stuff in between. props.children is how you get the elements within the opening and closing tags of the component */}
         {/* 
         <Person name='Max' age='28'/>
@@ -42,7 +45,9 @@ class App extends Component {
           age={this.state.persons[0].age} />
         <Person 
           name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}><p>
+          age={this.state.persons[1].age}
+          click={this.switchNameHandler.bind(this, 'Max!')}
+          ><p>
           My Hobbies: Racing</p></Person>
         <Person 
           name={this.state.persons[2].name} 
