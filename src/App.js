@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 //You can name the import anything instead of Person
-import Person from './Person/Person'
+import Person from './Person/Person';
 
 class App extends Component {
   state = {
@@ -36,11 +36,24 @@ class App extends Component {
   }
 
   render() {
+
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1x solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     return (
       <div className="App">
         <h1>Hi I'm a react app</h1>
         <p>This is really working!</p>
-        <button onClick={this.switchNameHandler.bind(this, 'Maximilian')}>Switch Name</button>
+
+        <button 
+          style={style}
+          onClick={this.switchNameHandler.bind(this, 'Maximilian')}>Switch Name
+        </button>
 
         {/* Alternative which executes an arrow function that does not use bind. It is a convenient syntax but can be inneficient. React can rerender certain things in the app too often. Using bind syntax is recomended since it is more efficient.*/}
         <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name2</button>
