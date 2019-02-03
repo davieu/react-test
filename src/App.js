@@ -51,6 +51,28 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let persons = null; 
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person 
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age} />
+          <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'Max!')}
+            changed={this.nameChangedHandler}
+            ><p>
+            My Hobbies: Racing</p></Person>
+          <Person 
+            name={this.state.persons[2].name} 
+            age={this.state.persons[2].age} />
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Hi I'm a react app</h1>
@@ -61,40 +83,24 @@ class App extends Component {
           onClick={this.togglePersonsHandler}>Switch Name
         </button>
 
-        {/* Alternative which executes an arrow function that does not use bind. It is a convenient syntax but can be inneficient. React can rerender certain things in the app too often. Using bind syntax is recomended since it is more efficient.*/}
-        {/* {<button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name2</button>} */}
-          {/*you can render them both ways. Bottom is for nesting stuff in between. props.children is how you get the elements within the opening and closing tags of the component */}
-        {/* 
-        <Person name='Max' age='28'/>
-        <Person name='Manu' age='29'><p>My Hobbies: Racing</p></Person>
-        <Person name='Stephanie' age='26'><p>test: kayak</p></Person>
-        */}
-        { 
-          this.state.showPersons === true ?
-            <div>
-              <Person 
-                name={this.state.persons[0].name} 
-                age={this.state.persons[0].age} />
-              <Person 
-                name={this.state.persons[1].name} 
-                age={this.state.persons[1].age}
-                click={this.switchNameHandler.bind(this, 'Max!')}
-                changed={this.nameChangedHandler}
-                ><p>
-                My Hobbies: Racing</p></Person>
-              <Person 
-                name={this.state.persons[2].name} 
-                age={this.state.persons[2].age} />
-            </div> : null
-        }
-
+        {persons}
       </div>
-  
     );
 
-    //this is react without jsx
-    // return React.createElement('div', {className: 'App'}, null, React.createElement('h1', null, 'Hi, I\'m a React App!!!'));
+
   }
 }
 
 export default App;
+
+//this is react without jsx
+// return React.createElement('div', {className: 'App'}, null, React.createElement('h1', null, 'Hi, I\'m a React App!!!'));
+
+/* Alternative which executes an arrow function that does not use bind. It is a convenient syntax but can be inneficient. React can rerender certain things in the app too often. Using bind syntax is recomended since it is more efficient.*/
+/* {<button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name2</button>} */
+/*you can render them both ways. Bottom is for nesting stuff in between. props.children is how you get the elements within the opening and closing tags of the component */
+/* 
+<Person name='Max' age='28'/>
+<Person name='Manu' age='29'><p>My Hobbies: Racing</p></Person>
+<Person name='Stephanie' age='26'><p>test: kayak</p></Person>
+*/
