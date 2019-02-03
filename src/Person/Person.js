@@ -8,7 +8,7 @@ const person = (props) => {
             <p onClick={props.click} >I'm {props.name} and I am {props.age} years old!</p>
             {/*props.children - children is a reserved word. children refers to any elements within the opening and closing tags of the component*/}
             {props.children}
-            <input type="text" placeholder="Name Here" onChange={props.changed} Value={props.name} />
+            <input type="text" placeholder="Name Here" onChange={props.changed} value={props.name} />
         </div>
     )
 }

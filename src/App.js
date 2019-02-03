@@ -10,7 +10,8 @@ class App extends Component {
       { name: 'Manu', age: 29 },
       { name: 'Stephanie', age: 26 }
     ],
-    otherState: 'some other value'
+    otherState: 'some other value',
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -35,6 +36,11 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow})
+  }
+
   render() {
 
     const style = {
@@ -52,30 +58,36 @@ class App extends Component {
 
         <button 
           style={style}
-          onClick={this.switchNameHandler.bind(this, 'Maximilian')}>Switch Name
+          onClick={this.togglePersonsHandler}>Switch Name
         </button>
 
         {/* Alternative which executes an arrow function that does not use bind. It is a convenient syntax but can be inneficient. React can rerender certain things in the app too often. Using bind syntax is recomended since it is more efficient.*/}
-        <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name2</button>
+        {/* {<button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name2</button>} */}
           {/*you can render them both ways. Bottom is for nesting stuff in between. props.children is how you get the elements within the opening and closing tags of the component */}
         {/* 
         <Person name='Max' age='28'/>
         <Person name='Manu' age='29'><p>My Hobbies: Racing</p></Person>
         <Person name='Stephanie' age='26'><p>test: kayak</p></Person>
         */}
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Max!')}
-          changed={this.nameChangedHandler}
-          ><p>
-          My Hobbies: Racing</p></Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age} />
+        { 
+          this.state.showPersons === true ?
+            <div>
+              <Person 
+                name={this.state.persons[0].name} 
+                age={this.state.persons[0].age} />
+              <Person 
+                name={this.state.persons[1].name} 
+                age={this.state.persons[1].age}
+                click={this.switchNameHandler.bind(this, 'Max!')}
+                changed={this.nameChangedHandler}
+                ><p>
+                My Hobbies: Racing</p></Person>
+              <Person 
+                name={this.state.persons[2].name} 
+                age={this.state.persons[2].age} />
+            </div> : null
+        }
+
       </div>
   
     );
