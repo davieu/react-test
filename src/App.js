@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-//You can name the import anything instead of Person
 import Person from './Person/Person';
 
 class App extends Component {
